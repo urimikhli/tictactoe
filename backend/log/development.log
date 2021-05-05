@@ -1037,3 +1037,45 @@ puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
 puma (3.12.0) lib/puma/server.rb:472:in `process_client'
 puma (3.12.0) lib/puma/server.rb:332:in `block in run'
 puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/api/v1/players.json" for 127.0.0.1 at 2021-05-05 17:07:19 -0400
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/urimikhli/.rvm/gems/ruby-2.5.3/gems/activerecord-5.2.6/lib/active_record/log_subscriber.rb:98
+Processing by Api::V1::PlayersController#index as JSON
+  [1m[36mPlayer Load (0.7ms)[0m  [1m[34mSELECT "players".* FROM "players"[0m
+  ↳ app/controllers/api/v1/players_controller.rb:9
+Completed 200 OK in 17ms (Views: 11.0ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/api/v1/players.json" for 127.0.0.1 at 2021-05-05 17:07:30 -0400
+Processing by Api::V1::PlayersController#index as JSON
+  [1m[36mPlayer Load (0.2ms)[0m  [1m[34mSELECT "players".* FROM "players"[0m
+  ↳ app/controllers/api/v1/players_controller.rb:9
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.2ms)
+
+
+Started PUT "/api/v1/players/7" for 127.0.0.1 at 2021-05-05 17:13:51 -0400
+Started POST "/api/v1/players" for 127.0.0.1 at 2021-05-05 17:13:51 -0400
+Processing by Api::V1::PlayersController#update as HTML
+  Parameters: {"player"=>{"wins"=>3, "losses"=>0, "draws"=>0}, "id"=>"7"}
+Processing by Api::V1::PlayersController#create as HTML
+  Parameters: {"player"=>{"name"=>"bar", "wins"=>0, "losses"=>1, "draws"=>0}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/players_controller.rb:22
+  [1m[36mPlayer Create (1.0ms)[0m  [1m[32mINSERT INTO "players" ("name", "losses", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "bar"], ["losses", 1], ["created_at", "2021-05-05 21:13:51.490887"], ["updated_at", "2021-05-05 21:13:51.490887"]]
+  ↳ app/controllers/api/v1/players_controller.rb:22
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/players_controller.rb:22
+Completed 201 Created in 6ms (Views: 0.3ms | ActiveRecord: 2.0ms)
+
+
+  [1m[36mPlayer Load (0.3ms)[0m  [1m[34mSELECT  "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/players_controller.rb:47
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/players_controller.rb:31
+  [1m[36mPlayer Update (0.5ms)[0m  [1m[33mUPDATE "players" SET "wins" = ?, "updated_at" = ? WHERE "players"."id" = ?[0m  [["wins", 3], ["updated_at", "2021-05-05 21:13:51.508570"], ["id", 7]]
+  ↳ app/controllers/api/v1/players_controller.rb:31
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/players_controller.rb:31
+Completed 200 OK in 24ms (Views: 0.1ms | ActiveRecord: 1.7ms)
+
+
