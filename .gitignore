@@ -1,3 +1,6 @@
-backend/log
-backend/tmp
+backend/log/
+backend/tmp/
+**/*.log
+**/*.pid
+.*.swp
 
