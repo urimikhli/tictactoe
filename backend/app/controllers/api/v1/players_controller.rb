@@ -33,7 +33,7 @@ class Api::V1::PlayersController < ApplicationController
       else
         render json: @list.errors, status: :unprocessable_entity
       end
-    end
+  end
 
   # DELETE /players/1
   def destroy

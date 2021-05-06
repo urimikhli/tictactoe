@@ -11,6 +11,7 @@ RSpec.describe Player, type: :model do
   it { should respond_to(:wins) }
   it { should respond_to(:losses) }
   it { should respond_to(:draws) }
+  it { should respond_to(:winloss) }
   it { should be_valid }
 
   describe 'test no name' do
