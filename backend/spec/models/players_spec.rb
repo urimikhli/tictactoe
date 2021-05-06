@@ -21,18 +21,33 @@ RSpec.describe Player, type: :model do
   end
 
   describe '#winloss' do
-    context '  winloss  is calculated when player is created ' do
-      before do
-        @player.save
-        @player.reload
-      end
-      it 'should return winloss when player is created' do
-        expect(@player.winloss).not_to be_nil
-      end
-      it 'should be an accurate winloss ratio' do
-        winloss =  ( @player.wins + ( @player.draws * 0.5 ) / (@player.wins + @player.losses + @player.draws) )
-        expect(@player.winloss).to eq(winloss)
+    describe ' winloss  is calculated when player is created ' do
+      let (:player)  { FactoryBot.create(:player, wins:33, draws:33, losses:34) }
 
+      it 'should return winloss when player is created' do
+        expect(player.winloss).not_to be_nil
+      end
+
+      it 'should be an accurate winloss ratio' do
+        #winloss =  ( player.wins + ( player.draws * 0.5 ) / (player.wins + player.losses + player.draws) )
+        winloss =  49.50 
+        expect(player.winloss).to eq(winloss)
+      end
+    end
+
+    describe ' winloss   is calculated when player is updated' do
+      let (:player)  { FactoryBot.create(:player, wins:33, draws:33, losses:34) }
+      
+      it 'should return winloss when player attributes are updated' do
+        expect(player.winloss).to eq(49.50)
+        player.update({wins: 34})
+        expect(player.winloss).to eq(50)
+      end
+
+      it 'should ignore updates to winloss' do
+        expect(player.winloss).to eq(49.50)
+        player.update({winloss: 26})
+        expect(player.winloss).to eq(49.5)
       end
     end
   end

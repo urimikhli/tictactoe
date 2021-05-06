@@ -2,7 +2,7 @@
 
 class Player < ApplicationRecord
   validates_presence_of :name
-  before_save :calculate_winloss, only: %i[create]
+  before_save :calculate_winloss, only: %i[create update]
 
   def calculate_winloss
     wins =  self.wins
