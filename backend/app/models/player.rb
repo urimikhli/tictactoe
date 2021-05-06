@@ -9,8 +9,9 @@ class Player < ApplicationRecord
     losses = self.losses
     draws = self.draws
 
-    top = wins + (0.5 * draws)
+    top = wins + (draws * 0.5.to_d)
     bottom = wins + losses + draws
-    self.winloss = (top / bottom) * 100
+    winloss =  ( top.to_d / bottom.to_d ).to_d * 100.to_d
+    self.winloss = winloss.to_d
   end
 end

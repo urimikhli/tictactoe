@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_05_06_200347) do
     t.integer "draws", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "winloss", precision: 5, scale: 2
+    t.decimal "winloss", precision: 6, scale: 2
   end
 
 end
