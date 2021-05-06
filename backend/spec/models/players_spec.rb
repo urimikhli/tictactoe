@@ -22,10 +22,17 @@ RSpec.describe Player, type: :model do
 
   describe '#winloss' do
     context '  winloss  is calculated when player is created ' do
-      it 'should return winloss when player is created' do
+      before do
         @player.save
         @player.reload
+      end
+      it 'should return winloss when player is created' do
         expect(@player.winloss).not_to be_nil
+      end
+      it 'should be an accurate winloss ratio' do
+        winloss =  ( @player.wins + ( @player.draws * 0.5 ) / (@player.wins + @player.losses + @player.draws) )
+        expect(@player.winloss).to eq(winloss)
+
       end
     end
   end
