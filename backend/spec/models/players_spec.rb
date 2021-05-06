@@ -19,4 +19,14 @@ RSpec.describe Player, type: :model do
       FactoryBot.build(:player, name: nil).should_not be_valid
     end
   end
+
+  describe '#winloss' do
+    context '  winloss  is calculated when player is created ' do
+      it 'should return winloss when player is created' do
+        @player.save
+        @player.reload
+        expect(@player.winloss).not_to be_nil
+      end
+    end
+  end
 end
