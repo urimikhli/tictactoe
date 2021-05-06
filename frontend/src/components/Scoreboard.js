@@ -97,6 +97,19 @@ class Scoreboard extends React.Component {
     return index + 1;
   }
 
+  winloss(player) {
+    console.log("Player", player.name, )
+
+    let [wins, losses, draws] = [player.wins, player.losses,player.draws]
+
+    let top =  wins + (draws * 0.5);
+    let bottom = (wins + losses + draws);
+    let winloss = top / bottom;
+
+    return (winloss * 100).toPrecision(3);
+  }
+
+
   render() {
     return (
       <>
@@ -109,6 +122,7 @@ class Scoreboard extends React.Component {
               <th>Wins</th>
               <th>Losses</th>
               <th>Draws</th>
+              <th>W/L Ratio</th>
             </tr>
             {this.state.players.map(obj => (
               <tr key={obj.id}>
@@ -116,6 +130,7 @@ class Scoreboard extends React.Component {
                 <td> {obj.wins} </td>
                 <td> {obj.losses} </td>
                 <td> {obj.draws} </td>
+                <td> {this.winloss(obj)} </td>
               </tr>
             ))}
             </tbody>
