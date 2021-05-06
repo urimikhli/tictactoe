@@ -1,5 +1,6 @@
 backend/log/
 backend/tmp/
+**/*.sqlite3
 **/*.log
 **/*.pid
 .*.swp
