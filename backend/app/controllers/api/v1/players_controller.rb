@@ -34,9 +34,9 @@ class Api::V1::PlayersController < ApplicationController
   # PATCH/PUT /players/1
   def update
       if @player.update(player_params)
-        render json: @list
+        render json: player_with_winloss, status: :accepted, location: api_v1_player_url(@player)
       else
-        render json: @list.errors, status: :unprocessable_entity
+        render json: @player.errors, status: :unprocessable_entity
       end
   end
 

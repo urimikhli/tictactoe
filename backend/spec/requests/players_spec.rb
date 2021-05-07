@@ -17,7 +17,6 @@ RSpec.describe "/players", type: :request do
     describe "GET /show" do
         it 'should add winloss to rendered player ' do
             get '/api/v1/players/1'
-            pp json
             expect(json['winloss']).to be(49.5)
         end
     end
@@ -25,12 +24,16 @@ RSpec.describe "/players", type: :request do
     describe "POST /players" do
         it 'should render winloss attribute when creating a player' do
             player_attributes = FactoryBot.build(:player, wins:33 , losses:34, draws: 33).attributes
-            pp player_attributes
             post '/api/v1/players/', params: {player: player_attributes}
             expect(json['winloss']).to be(49.5)
         end
     end
 
     describe "PUT /players/:id" do
+        it 'should render winloss attribute when creating a player' do
+            player.wins = 34
+            patch '/api/v1/players/'+player.id.to_s, params: {player: player.attributes}
+            expect(json['winloss']).to be(50.0)
+        end
     end
 end
