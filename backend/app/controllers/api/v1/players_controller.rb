@@ -15,7 +15,8 @@ class Api::V1::PlayersController < ApplicationController
 
   # GET /players/1
   def show
-    render json: @player
+      
+    render json: @player.attributes.to_hash.merge(winloss: calculate_winloss(@player)).to_json
   end
 
   # POST /players

@@ -8,12 +8,23 @@ RSpec.describe "/players", type: :request do
         player2
     end
     describe "GET /index" do
-        context 'add winloss to rendered json' do
-            it 'should add a winloss field to each player rendered in players list ' do
-                get '/api/v1/players'
-                expect(json_data[0][:winloss]).to be(49.5)
-                expect(json_data[1][:winloss]).to be(50.0)
-            end
+        it 'should add a winloss field to each player rendered in players list ' do
+            get '/api/v1/players'
+            expect(json_data[0][:winloss]).to be(49.5)
+            expect(json_data[1][:winloss]).to be(50.0)
         end
+    end
+    describe "GET /show" do
+        it 'should add winloss to rendered player ' do
+            get '/api/v1/players/1'
+            pp json
+            expect(json['winloss']).to be(49.5)
+        end
+    end
+
+    describe "POST /players" do
+    end
+
+    describe "PUT /players/:id" do
     end
 end
