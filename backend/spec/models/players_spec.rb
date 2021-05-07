@@ -18,4 +18,11 @@ RSpec.describe Player, type: :model do
       FactoryBot.build(:player, name: nil).should_not be_valid
     end
   end
+
+  describe 'Player.calculate_winloss' do
+    it 'should return the winloss ratio' do
+      player = FactoryBot.build(:player, wins:33 , losses:34, draws: 33)
+      expect(Player.calculate_winloss(player)).to eq(49.5)
+    end
+  end
 end
