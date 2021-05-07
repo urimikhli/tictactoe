@@ -3,4 +3,8 @@ module RequestSpecHelper
   def json
     JSON.parse(response.body)
   end
+
+  def json_data
+    json.map{|x| x.deep_symbolize_keys }
+  end
 end
