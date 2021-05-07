@@ -16,7 +16,7 @@ class Api::V1::PlayersController < ApplicationController
   # GET /players/1
   def show
       
-    render json: @player.attributes.to_hash.merge(winloss: calculate_winloss(@player)).to_json
+    render json: player_with_winloss
   end
 
   # POST /players
@@ -25,7 +25,7 @@ class Api::V1::PlayersController < ApplicationController
 
 
     if @player.save
-      render json: @player, status: :created, location: api_v1_player_url(@player)
+      render json: player_with_winloss, status: :created, location: api_v1_player_url(@player)
     else
       render json: @player.errors, status: :unprocessable_entity
     end
@@ -54,6 +54,10 @@ class Api::V1::PlayersController < ApplicationController
 
   def calculate_winloss(player)
     Player.calculate_winloss(player)
+  end
+
+  def player_with_winloss
+    @player.attributes.to_hash.merge(winloss: calculate_winloss(@player)).to_json
   end
 
 
