@@ -4,9 +4,13 @@ class Api::V1::PlayersController < ApplicationController
   before_action :set_player, only: %i[show update destroy]
   # GET /players
   def index
-    @players = Player.all
+    players = Player.all
+    @players = []
 
-    render json: @players
+    players.map do |player|
+      @players.push player.attributes.to_hash.merge(winloss: calculate_winloss(player))
+    end
+    render json: @players.to_json
   end
 
   # GET /players/1
@@ -33,7 +37,7 @@ class Api::V1::PlayersController < ApplicationController
       else
         render json: @list.errors, status: :unprocessable_entity
       end
-    end
+  end
 
   # DELETE /players/1
   def destroy
@@ -47,6 +51,9 @@ class Api::V1::PlayersController < ApplicationController
     @player = Player.find(params[:id])
   end
 
+  def calculate_winloss(player)
+    Player.calculate_winloss(player)
+  end
 
 
   # Only allow a trusted parameter "white list" through.
